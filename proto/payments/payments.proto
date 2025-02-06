@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package rpc.proto;
+
+option go_package = "rpc/proto";
+import "google/api/annotations.proto";
+
+
+
+// The PaymentService exposes gRPC methods
+service PaymentService {
+    rpc CreatePayment (CreatePaymentRequest) returns (CreatePaymentResponse) {
+        option (google.api.http) = {
+            post: "/v1/payment",
+            body: "*"
+        };
+    }
+
+    rpc UpdatePayment (UpdatePaymentRequest) returns (UpdatePaymentResponse) {
+        option (google.api.http) = {
+            put: "/v1/payment/{payment.id}",
+            body: "*"
+        };
+    }
+
+    rpc GetPaymentByID (GetPaymentByIDRequest) returns (GetPaymentByIDResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/{id}"
+        };
+    }
+
+    rpc RandomDummyData (RandomDummyDataRequest) returns (RandomDummyDataResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/dummy"
+        };
+    }
+}
+
+// Messages for Payment
+message Payment {
+    string id = 1;
+    string user_id = 2;
+    float amount = 3;
+    string payment_method = 4;
+    string status = 5;
+    string date_created = 6;
+}
+
+// Messages for CreatePayment
+message CreatePaymentRequest {
+    Payment payment = 1;
+}
+
+message CreatePaymentResponse {
+    Payment payment = 1;
+}
+
+// Messages for UpdatePayment
+message UpdatePaymentRequest {
+    Payment payment = 1;
+}
+
+message UpdatePaymentResponse {
+    Payment payment = 1;
+}
+
+// Messages for GetPaymentByID
+message GetPaymentByIDRequest {
+    string id = 1;
+}
+
+message GetPaymentByIDResponse {
+    Payment payment = 1;
+}
+
+// Messages for RandomDummyData
+message RandomDummyDataRequest {
+    int32 count = 1; // Number of random payments to fetch
+}
+
+message RandomDummyDataResponse {
+    repeated Payment payments = 1; // List of random payments
+}

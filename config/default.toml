@@ -1,0 +1,17 @@
+# config/default.toml
+
+[database]
+host = "localhost"
+port = 5432
+user = "payments_user"
+password = "password"
+dbname = "payments_app"
+sslmode = "disable"
+
+[weather]
+weather_api_url = "http://api.weatherapi.com/v1/current.json"
+weather_refresh_time = 10
+
+[server]
+port = 9602
+httpPort = 9603
