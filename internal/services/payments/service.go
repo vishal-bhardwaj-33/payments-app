@@ -21,7 +21,7 @@ func (s *PaymentServiceServerImpl) CreatePayment(ctx context.Context, req *proto
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("Hello I am here in the create Payment ")
+	// fmt.Printf("Hello I am here in the create Payment ")
 
 	// Check if payment already exists
 	_, queryDBErr := repository.FindPaymentByID(payment.ID)
