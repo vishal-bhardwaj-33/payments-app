@@ -11,6 +11,12 @@ type Config struct {
 		SslMode  string `mapstructure:"sslmode"`
 	} `mapstructure:"database"`
 
+	Payment struct {
+		APIURL      string `mapstructure:"payment_api_url"`
+		APIKey      string `mapstructure:"payment_api_key"`
+		RefreshTime int    `mapstructure:"payment_refresh_time"`
+	} `mapstructure:"Payment"`
+
 	Server struct {
 		Port     int `mapstructure:"port"`
 		HTTPPort int `mapstructure:"httpPort"`

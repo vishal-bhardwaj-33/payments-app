@@ -85,7 +85,7 @@ func (s *PaymentServiceServerImpl) RandomDummyData(ctx context.Context, req *pro
 	count := int(req.GetCount()) // Get the count from the request
 
 	// Fetch random payment data from external API
-	payments, err := repository.FetchRandomPayments(count)
+	payments, err := repository.FetchRandomPayments(count, s.Config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch random payments: %v", err)
 	}

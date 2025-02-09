@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"payments-app/internal/config"
 	"payments-app/internal/database"
 	entities "payments-app/internal/entities/payments"
 	"payments-app/internal/utils"
@@ -57,7 +58,7 @@ func UpdatePayment(payment *entities.Payment) error {
 	return nil
 }
 
-func UpdatePaymentWithCOALESCE(id string, amount float32, status, paymentMethod string) error {
+func UpdatePaymentWithCOALESCE(id string, amount float32, status, paymentMethod string) error { // this can be optimized but for now it is reliant on DB using coalesce
     query := `
     UPDATE payments
     SET 
@@ -97,10 +98,9 @@ func FindPaymentByID(paymentID string) (*entities.Payment, error) {
 }
 
 // FetchRandomPayments fetch data from external API
-func FetchRandomPayments(count int) ([]*entities.Payment, error) {
-	url := fmt.Sprintf("http://localhost:3000/payments?count=%d", count)
+func FetchRandomPayments(count int, appConfig config.Config) ([]*entities.Payment, error) {
 
-	resp, err := http.Get(url)
+	resp, err := http.Get(appConfig.Payment.APIURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to call external API: %v", err)
 	}

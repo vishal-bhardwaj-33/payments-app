@@ -8,9 +8,8 @@ password = "password"
 dbname = "payments_app"
 sslmode = "disable"
 
-[weather]
-weather_api_url = "http://api.weatherapi.com/v1/current.json"
-weather_refresh_time = 10
+[payment]
+payment_api_url = "https://run.mocky.io/v3/8f85da42-42cb-4fab-a51b-ea0a14153b97"
 
 [server]
 port = 9602
